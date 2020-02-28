@@ -34,6 +34,15 @@ passport.deserializeUser((obj, deserialize) => {
   deserialize(null, obj);
 });
 
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['email', 'profile'] })
+);
+
+app.get('/auth/google/callback', (req, res) => {
+  res.send(`I'm back from Google!`);
+});
+
 app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 'main' }));
 app.set('view engine', '.hbs');
 
