@@ -17,6 +17,13 @@ passport.use(new GoogleStrategy({
 done(null, profile);
 }));
 
+//Express init session
+app.use(session({ secret: 'anything' }));
+
+// init passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 'main' }));
 app.set('view engine', '.hbs');
 
