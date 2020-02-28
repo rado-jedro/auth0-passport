@@ -3,10 +3,16 @@ const router = express.Router();
 
 router.get('/logged', (req, res) => {
   if (req.user) {
-    res.render('logged', {
-      name: req.user.displayName,
-      avatar: req.user.photos[0].value,
-    });
+    if (req.user.photos.indexOf(0)) {
+      res.render('logged', {
+        name: req.user.displayName,
+        avatar: req.user.photos[0].value
+      });
+    } else {
+      res.render('logged', {
+        name: req.user.displayName
+      });
+    }
   } else {
     res.redirect('/user/no-permission');
   }
